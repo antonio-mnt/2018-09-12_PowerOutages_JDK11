@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.poweroutages.model.Model;
+import it.polito.tdp.poweroutages.model.Nerc;
+import it.polito.tdp.poweroutages.model.Vicino;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,7 +30,7 @@ public class FXMLController {
     private Button btnCreaGrafo;
 
     @FXML
-    private ComboBox<?> cmbBoxNerc;
+    private ComboBox<Nerc> cmbBoxNerc;
 
     @FXML
     private Button btnVisualizzaVicini;
@@ -41,6 +43,12 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
+    	this.model.creaGrafo();
+    	
+    	this.txtResult.setText("Grafo creato!\nVertici: "+this.model.getNumeroVertici()+" Archi: "+this.model.getNumeroArchi()+"\n");
+    	
+    	this.cmbBoxNerc.getItems().addAll(this.model.getNerc());
 
     }
 
@@ -51,6 +59,18 @@ public class FXMLController {
 
     @FXML
     void doVisualizzaVicini(ActionEvent event) {
+    	
+    	Nerc n = this.cmbBoxNerc.getValue();
+    	
+    	if(n==null) {
+    		this.txtResult.setText("Selezionare un NERC");
+    		return;
+    	}
+    	
+    	this.txtResult.clear();
+    	for(Vicino v: this.model.getVicini(n)) {
+    		this.txtResult.appendText(v+"\n");
+    	}
 
     }
 

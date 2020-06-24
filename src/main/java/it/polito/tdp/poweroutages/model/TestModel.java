@@ -6,6 +6,9 @@ public class TestModel {
 		// TODO Auto-generated method stub
 
 		Model m = new Model();
+		
+		m.creaGrafo();
+		m.getEventi();
 	}
 
 }

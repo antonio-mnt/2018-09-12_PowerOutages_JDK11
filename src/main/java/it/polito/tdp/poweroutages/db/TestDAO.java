@@ -19,5 +19,6 @@ public class TestDAO {
 
 		System.out.println(dao.loadAllNercs());
 	}
+	
 
 }
